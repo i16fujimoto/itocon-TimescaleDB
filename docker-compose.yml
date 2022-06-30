@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  app:
+    build: .
+    container_name: go_app
+    volumes:
+      - ./:/go/src/app
+    tty: true
+    stdin_open: true
+    environment:
+            CONNECT: "postgres://postgres:root@tsdb:5432/itocon_db"
+            GO111MODULE: "on"
+    ports:
+      - "8080:8080"
+
+  timescaledb:
+    image: timescale/timescaledb-ha:pg14-latest
+    container_name: tsdb
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5432:5432
+    tty: true
+    stdin_open: true
