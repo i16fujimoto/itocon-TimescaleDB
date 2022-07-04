@@ -8,8 +8,9 @@ services:
     tty: true
     stdin_open: true
     environment:
-            CONNECT: "postgres://postgres:root@tsdb:5432/itocon_db"
+            CONNECT: "host=tsdb port=5432 user=postgres dbname=itocon_db password=root sslmode=disable"
             GO111MODULE: "on"
+            PORT: "8080"
     ports:
       - "8080:8080"
 
